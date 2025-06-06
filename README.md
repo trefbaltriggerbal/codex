@@ -63,3 +63,13 @@ After a successful build, execute the test suite with:
 ```bash
 dotnet test HelloWorldApp.sln --verbosity normal
 ```
+
+## Publishing a single Windows executable
+
+To generate a single Windows `.exe` without additional files, run:
+
+```bash
+dotnet publish LinearCongruentGenerator.CLI -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true
+```
+
+The executable is written to `LinearCongruentGenerator.CLI/bin/Release/net8.0/win-x64/publish/`.
