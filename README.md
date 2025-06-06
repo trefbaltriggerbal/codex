@@ -73,3 +73,28 @@ dotnet publish LinearCongruentGenerator.CLI -c Release -r win-x64 --self-contain
 ```
 
 The executable is written to `LinearCongruentGenerator.CLI/bin/Release/net8.0/win-x64/publish/`.
+
+## Creating Releases
+
+1. Update the version in `LinearCongruentGenerator/LinearCongruentGenerator.csproj`.
+2. Commit the change and create a git tag:
+
+```bash
+git tag -a v1.0.0 -m "Release v1.0.0"
+```
+
+3. Push your tag to GitHub and draft a new release in the web interface.
+
+## Packaging for NuGet
+
+Use `dotnet pack` to create a NuGet package from the library project:
+
+```bash
+dotnet pack LinearCongruentGenerator/LinearCongruentGenerator.csproj --configuration Release
+```
+
+The generated `.nupkg` is found in `LinearCongruentGenerator/bin/Release`.
+
+## Deployment with GitHub Actions
+
+An example workflow is provided in `.github/workflows/deploy.yml`. It builds the solution and publishes the CLI whenever a tag starting with `v` is pushed.
