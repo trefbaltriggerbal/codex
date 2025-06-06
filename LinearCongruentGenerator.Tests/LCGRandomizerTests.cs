@@ -1,8 +1,4 @@
-using LinearCongruentGenerator;
-using System.Collections.Generic;
-using Xunit;
-
-namespace LinearCongruentGenerator.Tests;
+﻿namespace LinearCongruentGenerator.Tests;
 
 public class LCGRandomizerTests
 {

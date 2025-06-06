@@ -1,1 +1,1 @@
-return LinearCongruentGenerator.CLI.CliApp.Run(args);
+﻿LinearCongruentGenerator.CLI.CliApp.Run(args);
