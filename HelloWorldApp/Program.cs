@@ -56,11 +56,32 @@ for (int i = 0; i < args.Length; i++)
     }
 }
 
-LCGRandomizer rng = new(multiplier, addition, modulus, seed);
+LCGRandomizer rng;
 
-void RebuildRng()
+try
 {
+    LCGValidator.Validate(multiplier, addition, modulus);
     rng = new LCGRandomizer(multiplier, addition, modulus, seed);
+}
+catch (LCGException ex)
+{
+    Console.WriteLine($"Error: {ex.Message}");
+    return;
+}
+
+bool RebuildRng()
+{
+    try
+    {
+        LCGValidator.Validate(multiplier, addition, modulus);
+        rng = new LCGRandomizer(multiplier, addition, modulus, seed);
+        return true;
+    }
+    catch (LCGException ex)
+    {
+        Console.WriteLine($"Error: {ex.Message}");
+        return false;
+    }
 }
 
 if (interactive)
@@ -124,16 +145,28 @@ if (interactive)
                 switch (parts[1].ToLowerInvariant())
                 {
                     case "m":
-                        multiplier = val;
-                        RebuildRng();
+                        {
+                            var old = multiplier;
+                            multiplier = val;
+                            if (!RebuildRng())
+                                multiplier = old;
+                        }
                         break;
                     case "a":
-                        addition = val;
-                        RebuildRng();
+                        {
+                            var old = addition;
+                            addition = val;
+                            if (!RebuildRng())
+                                addition = old;
+                        }
                         break;
                     case "c":
-                        modulus = val;
-                        RebuildRng();
+                        {
+                            var old = modulus;
+                            modulus = val;
+                            if (!RebuildRng())
+                                modulus = old;
+                        }
                         break;
                     default:
                         Console.WriteLine("Unknown parameter. Use m, a or c.");
