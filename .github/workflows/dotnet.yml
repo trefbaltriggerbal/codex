@@ -22,7 +22,8 @@ jobs:
     - name: Publish for Windows
       run: dotnet publish LinearCongruentGenerator.CLI -c Release -r win-x64 --self-contained false
     - name: Upload Windows executable
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
+
       with:
         name: lcg-cli-win-x64
         path: LinearCongruentGenerator.CLI/bin/Release/net8.0/win-x64/publish/
