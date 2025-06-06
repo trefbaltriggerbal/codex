@@ -43,21 +43,26 @@ public class LCGRandomizer
         if (jumps <= 0)
             return;
 
-        long a = ModPow(_multiplier, jumps, _modulus);
+        long accMul = 1;
+        long accAdd = 0;
+        long curMul = _multiplier;
+        long curAdd = _addition;
+        long step = jumps;
 
-        long b;
-        if (_multiplier == 1)
+        while (step > 0)
         {
-            b = Mod(jumps * _addition, _modulus);
-        }
-        else
-        {
-            long inv = ModInverse(_multiplier - 1, _modulus);
-            b = Mod((a - 1) * inv, _modulus);
-            b = Mod(b * _addition, _modulus);
+            if ((step & 1) == 1)
+            {
+                accMul = Mod(accMul * curMul, _modulus);
+                accAdd = Mod(accAdd * curMul + curAdd, _modulus);
+            }
+
+            curAdd = Mod(curAdd * (curMul + 1), _modulus);
+            curMul = Mod(curMul * curMul, _modulus);
+            step >>= 1;
         }
 
-        _seed = Mod(a * _seed + b, _modulus);
+        _seed = Mod(accMul * _seed + accAdd, _modulus);
     }
 
     private static long Mod(long value, long modulus)
@@ -66,43 +71,4 @@ public class LCGRandomizer
         return result < 0 ? result + modulus : result;
     }
 
-    private static long ModPow(long value, long exponent, long modulus)
-    {
-        long result = 1;
-        long baseVal = Mod(value, modulus);
-        long exp = exponent;
-
-        while (exp > 0)
-        {
-            if ((exp & 1) == 1)
-            {
-                result = Mod(result * baseVal, modulus);
-            }
-            baseVal = Mod(baseVal * baseVal, modulus);
-            exp >>= 1;
-        }
-
-        return result;
-    }
-
-    private static long ModInverse(long value, long modulus)
-    {
-        long t = 0, newT = 1;
-        long r = modulus, newR = Mod(value, modulus);
-
-        while (newR != 0)
-        {
-            long quotient = r / newR;
-            (t, newT) = (newT, t - quotient * newT);
-            (r, newR) = (newR, r - quotient * newR);
-        }
-
-        if (r > 1)
-            throw new InvalidOperationException("Value is not invertible");
-
-        if (t < 0)
-            t += modulus;
-
-        return t;
-    }
 }
