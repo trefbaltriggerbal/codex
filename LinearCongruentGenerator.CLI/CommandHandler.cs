@@ -62,8 +62,18 @@ public class CommandHandler
                 }
                 else
                 {
-                    _rng.Jump(steps);
-                    Console.WriteLine(_rng.Seed);
+                    try
+                    {
+                        _rng.Jump(steps);
+                        Console.WriteLine(_rng.Seed);
+                    }
+                    catch (ArgumentException ex)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine($"Warning: {ex.Message}. Negative jumps require the multiplier and modulus to be relatively prime.");
+                        Console.WriteLine("The jump was not performed.");
+                        Console.ResetColor();
+                    }
                 }
                 return true;
 
