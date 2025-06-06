@@ -5,6 +5,7 @@
    - Add project to existing solution `HelloWorldApp.sln`.
 
 2. **Implement `LCGRandomizer`** (#5)
+
 1. **Create Class Library Project** ([#4](https://github.com/trefbaltriggerbal/codex/issues/4))
    - Add a new class library named `LinearCongruentGenerator`.
    - Add project to existing solution `HelloWorldApp.sln`.
@@ -25,6 +26,7 @@
    - `Build()` constructs `LCGRandomizer` after validation.
 
 
+
 4. **Implement `LCGValidator`** ([#7](https://github.com/trefbaltriggerbal/codex/issues/7))
    - `Validate(long multiplier, long addition, long modulus)` called by builder.
 
@@ -36,7 +38,7 @@
    - Verify `Jump()` matches repeated `Next()` calls.
    - Ensure identical builders yield same sequences.
 
-7. **Update Documentation** (#10)
+
 7. **Update Documentation** ([#10](https://github.com/trefbaltriggerbal/codex/issues/10))
    - Add build/test instructions and usage examples to `README.md`.
 
