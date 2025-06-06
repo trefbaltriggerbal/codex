@@ -57,3 +57,15 @@ After a successful build, execute the test suite with:
 ```bash
 dotnet test HelloWorldApp.sln --verbosity normal
 ```
+
+## Testing helpers
+
+The library includes an optional `LCGTester` class with utility methods to aid manual experiments. It can compare sequences or check that `Jump` produces the expected result.
+
+```csharp
+var rng1 = new LCGRandomizer(m, a, c, 1);
+var rng2 = new LCGRandomizer(m, a, c, 1);
+bool equal = LCGTester.CompareSequences(rng1, rng2, 5);
+```
+
+Use `ValidateJump` to verify fast jumps against repeated calls.
