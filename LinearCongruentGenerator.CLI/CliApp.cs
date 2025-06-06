@@ -1,7 +1,4 @@
-using System;
-using System.Linq;
-using System.Text;
-using LinearCongruentGenerator;
+﻿using System.Text;
 
 namespace LinearCongruentGenerator.CLI;
 
