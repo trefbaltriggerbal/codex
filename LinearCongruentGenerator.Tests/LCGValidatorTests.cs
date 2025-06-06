@@ -25,4 +25,12 @@ public class LCGValidatorTests
     {
         Assert.Throws<InvalidModulusException>(() => LCGValidator.Validate(m, a, c));
     }
+
+    [Fact]
+    public void AnsiParametersWithSmallModulus_Throws()
+    {
+        long multiplier = 1103515245;
+        long addition = 12345;
+        Assert.Throws<InvalidMultiplierException>(() => LCGValidator.Validate(multiplier, addition, 5));
+    }
 }

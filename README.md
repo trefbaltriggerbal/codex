@@ -50,6 +50,12 @@ seed <val>       # set the seed value
 exit             # quit the CLI
 ```
 
+If a supplied parameter is invalid when using the `set` command, the CLI
+displays a warning in yellow. The previous valid value is shown so you can
+manually restore it with another `set` command. Until a valid value is
+provided, the generator is not rebuilt and its output may no longer be
+reliable.
+
 ## Running tests
 
 After a successful build, execute the test suite with:

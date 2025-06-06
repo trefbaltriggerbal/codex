@@ -6,7 +6,7 @@ public class CommandHandler
     private long _addition;
     private long _modulus;
     private long _seed;
-    private LCGRandomizer _rng;
+    private LCGRandomizer _rng = null!;
 
     public CommandHandler(long multiplier, long addition, long modulus, long seed)
     {
@@ -15,9 +15,8 @@ public class CommandHandler
         _modulus = modulus;
         _seed = seed;
 
-        // Validate parameters during construction
-        LCGValidator.Validate(_multiplier, _addition, _modulus);
-        _rng = new LCGRandomizer(_multiplier, _addition, _modulus, _seed);
+        if (!BuildRng(out var err))
+            throw new InvalidOperationException($"Invalid initial parameters: {err}");
     }
 
     public long Next() => _rng.Next();
@@ -60,8 +59,18 @@ public class CommandHandler
                 }
                 else
                 {
-                    _rng.Jump(steps);
-                    Console.WriteLine(_rng.Seed);
+                    try
+                    {
+                        _rng.Jump(steps);
+                        Console.WriteLine(_rng.Seed);
+                    }
+                    catch (ArgumentException ex)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine($"Warning: {ex.Message}. Negative jumps require the multiplier and modulus to be relatively prime.");
+                        Console.WriteLine("The jump was not performed.");
+                        Console.ResetColor();
+                    }
                 }
                 return true;
 
@@ -77,24 +86,39 @@ public class CommandHandler
                         {
                             var old = _multiplier;
                             _multiplier = val;
-                            if (!RebuildRng())
-                                _multiplier = old;
+                            if (!BuildRng(out var err))
+                            {
+                                Console.ForegroundColor = ConsoleColor.Yellow;
+                                Console.WriteLine($"Warning: {err}. Use 'set m {old}' to restore the previous value.");
+                                Console.WriteLine("The generator may produce unreliable results until a valid value is provided.");
+                                Console.ResetColor();
+                            }
                         }
                         break;
                     case "a":
                         {
                             var old = _addition;
                             _addition = val;
-                            if (!RebuildRng())
-                                _addition = old;
+                            if (!BuildRng(out var err))
+                            {
+                                Console.ForegroundColor = ConsoleColor.Yellow;
+                                Console.WriteLine($"Warning: {err}. Use 'set a {old}' to restore the previous value.");
+                                Console.WriteLine("The generator may produce unreliable results until a valid value is provided.");
+                                Console.ResetColor();
+                            }
                         }
                         break;
                     case "c":
                         {
                             var old = _modulus;
                             _modulus = val;
-                            if (!RebuildRng())
-                                _modulus = old;
+                            if (!BuildRng(out var err))
+                            {
+                                Console.ForegroundColor = ConsoleColor.Yellow;
+                                Console.WriteLine($"Warning: {err}. Use 'set c {old}' to restore the previous value.");
+                                Console.WriteLine("The generator may produce unreliable results until a valid value is provided.");
+                                Console.ResetColor();
+                            }
                         }
                         break;
                     default:
@@ -145,17 +169,18 @@ public class CommandHandler
         }
     }
 
-    private bool RebuildRng()
+    private bool BuildRng(out string? error)
     {
         try
         {
             LCGValidator.Validate(_multiplier, _addition, _modulus);
             _rng = new LCGRandomizer(_multiplier, _addition, _modulus, _seed);
+            error = null;
             return true;
         }
         catch (LCGException ex)
         {
-            Console.WriteLine($"Error: {ex.Message}");
+            error = ex.Message;
             return false;
         }
     }
