@@ -1,6 +1,6 @@
 # codex
 This repository contains a simple Linear Congruential Generator (LCG) sample
-written in C#. The `HelloWorldApp` project exposes a small command line
+written in C#. The `LinearCongruentGenerator.CLI` project exposes a small command line
 interface.
 
 Running the app without arguments starts an interactive CLI.
@@ -36,7 +36,7 @@ dotnet build HelloWorldApp.sln
 Once built you can start the interactive command line with:
 
 ```bash
-dotnet run --project HelloWorldApp
+dotnet run --project LinearCongruentGenerator.CLI
 ```
 
 ### Basic commands
