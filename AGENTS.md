@@ -14,7 +14,7 @@ To build and test the .NET projects in this repository:
    ```
 3. Run the solution (interactive CLI):
    ```bash
-   dotnet run --project HelloWorldApp
+   dotnet run --project LinearCongruentGenerator.CLI
    ```
 4. Run tests after building:
    ```bash
