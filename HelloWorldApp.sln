@@ -7,7 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorldApp", "HelloWorld
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinearCongruentGenerator", "LinearCongruentGenerator\LinearCongruentGenerator.csproj", "{B757D739-0577-42C8-9115-EABBDDB6C273}"
 EndProject
-
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinearCongruentGenerator.Tests", "LinearCongruentGenerator.Tests\LinearCongruentGenerator.Tests.csproj", "{38E7B90B-7901-4358-9B34-B87483812686}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,5 +26,9 @@ Global
 		{B757D739-0577-42C8-9115-EABBDDB6C273}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B757D739-0577-42C8-9115-EABBDDB6C273}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B757D739-0577-42C8-9115-EABBDDB6C273}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38E7B90B-7901-4358-9B34-B87483812686}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38E7B90B-7901-4358-9B34-B87483812686}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38E7B90B-7901-4358-9B34-B87483812686}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38E7B90B-7901-4358-9B34-B87483812686}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
