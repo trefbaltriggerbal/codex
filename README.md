@@ -82,6 +82,7 @@ Using `PublishTrimmed` removes unused framework code while `PublishAot` compiles
 the project ahead-of-time to a native image. These options considerably reduce
 the final file size at the cost of longer build times.
 
+
 ## Creating Releases
 
 1. Update the version in `LinearCongruentGenerator/LinearCongruentGenerator.csproj`.
@@ -93,6 +94,7 @@ git push origin v1.0.0
 ```
 
 3. Draft a new release on GitHub using the pushed tag.
+
 
 ## Packaging for NuGet
 
@@ -139,6 +141,7 @@ dotnet nuget push LinearCongruentGenerator/bin/Release/*.nupkg \
 Replace `<USER>`, `<TOKEN>` and `<OWNER>` with your account details. In GitHub
 Actions you can use `${{ secrets.GITHUB_TOKEN }}` instead of a personal access
 token.
+
 
 ## Deployment with GitHub Actions
 

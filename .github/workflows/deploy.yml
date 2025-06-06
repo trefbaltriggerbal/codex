@@ -32,6 +32,7 @@ jobs:
             -p:PublishTrimmed=true \
             -p:PublishAot=true \
             -o published
+
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
