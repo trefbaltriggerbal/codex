@@ -86,7 +86,7 @@ if (interactive)
             case "help":
                 Console.WriteLine("Commands:");
                 Console.WriteLine("  short                 - output next number");
-                Console.WriteLine("  fast <n>              - jump ahead n steps and output next number");
+                Console.WriteLine("  fast <n>              - move n steps (backwards if n<0) and show resulting seed");
                 Console.WriteLine("  set m|a|c <value>     - set multiplier/addition/modulus");
                 Console.WriteLine("  get m|a|c             - get current multiplier/addition/modulus");
                 Console.WriteLine("  seed <value>          - set seed value");
@@ -104,8 +104,15 @@ if (interactive)
                     Console.WriteLine("Usage: fast <steps>");
                     break;
                 }
-                rng.Jump(steps);
-                Console.WriteLine(rng.Next());
+                if (steps == 0)
+                {
+                    Console.WriteLine(rng.Seed);
+                }
+                else
+                {
+                    rng.Jump(steps);
+                    Console.WriteLine(rng.Seed);
+                }
                 break;
 
             case "set":
@@ -152,7 +159,7 @@ if (interactive)
                         Console.WriteLine(modulus);
                         break;
                     case "seed":
-                        Console.WriteLine(seed);
+                        Console.WriteLine(rng.Seed);
                         break;
                     default:
                         Console.WriteLine("Unknown parameter. Use m, a, c or seed.");
