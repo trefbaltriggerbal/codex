@@ -1,7 +1,4 @@
-using LinearCongruentGenerator;
-using Xunit;
-
-namespace LinearCongruentGenerator.Tests;
+﻿namespace LinearCongruentGenerator.Tests;
 
 public class LCGValidatorBoundaryTests
 {

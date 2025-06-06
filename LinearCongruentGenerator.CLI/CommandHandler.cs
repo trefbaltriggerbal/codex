@@ -1,7 +1,4 @@
-using System;
-using LinearCongruentGenerator;
-
-namespace LinearCongruentGenerator.CLI;
+﻿namespace LinearCongruentGenerator.CLI;
 
 public class CommandHandler
 {
